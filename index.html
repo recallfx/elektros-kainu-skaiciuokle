@@ -32,7 +32,7 @@
                     </path>
                 </svg>
             </a>
-            <span class="text-neutral-400">v3</span>
+            <span class="text-neutral-400">v4</span>
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -87,7 +87,8 @@
                 <div>Viso suvartota: {{energyConsumed.toFixed(2)}} {{units}}</div>
                 <div>Savarankiškumas: {{energySufficiency.toFixed(2)}}%</div>
                 <div class="flex flex-col">Balansas: {{energyBalance.toFixed(2)}} {{units}}<div v-if="energyBalance > 0"
-                        class="text-xs text-neutral-400">Atpirkimo tarifas {{priceSurplus}}€/kWh</div>
+                        class="text-xs text-neutral-400">Atpirkimo tarifas {{priceSurplus}}€/kWh, max
+                        {{surplusMaxkWh}}kWh per du metus</div>
                 </div>
 
                 <hr class="my-1" />
@@ -119,22 +120,22 @@
 
 
     <script type="module">
-        import { createApp, ref, computed, watch } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js';
+        import { createApp, ref, computed, watch, watchEffect } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.prod.js';
 
         let costChart;
 
-        function calculateOption1Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, priceRetrieval) {
+        function calculateOption1Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, surplusMaxkWh, priceRetrieval) {
             const energyReducedkWh = Math.min(energyStoredkWh, energyConsumedGridChartkWh);
             const energyAfterConsumptionkWh = energyConsumedGridChartkWh - energyStoredkWh;
             const energyStandardkWh = Math.max(energyAfterConsumptionkWh, 0);
-            const energySurpluskWh = Math.min(energyAfterConsumptionkWh, 0);
+            const energySurpluskWh = Math.min(Math.max(energyAfterConsumptionkWh, -surplusMaxkWh), 0);
             return (energyReducedkWh * priceRetrieval) + (energyStandardkWh * priceStandard) + (energySurpluskWh * priceSurplus);
         }
 
-        function calculateOption2Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, solarCapacity, priceForCapacity, monthsInYear) {
+        function calculateOption2Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, surplusMaxkWh, solarCapacity, priceForCapacity, monthsInYear) {
             const energyAfterConsumptionkWh = energyConsumedGridChartkWh - energyStoredkWh;
             const energyStandardkWh = Math.max(energyAfterConsumptionkWh, 0);
-            const energySurpluskWh = Math.min(energyAfterConsumptionkWh, 0);
+            const energySurpluskWh = Math.min(Math.max(energyAfterConsumptionkWh, -surplusMaxkWh), 0);
 
             if (solarCapacity > 0) {
                 return (solarCapacity * priceForCapacity * monthsInYear) + (energyStandardkWh * priceStandard) + (energySurpluskWh * priceSurplus);
@@ -143,10 +144,10 @@
             return energyStandardkWh * priceStandard;
         }
 
-        function calculateOption3Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, percentageFromStored) {
+        function calculateOption3Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, surplusMaxkWh, percentageFromStored) {
             const energyAfterDeductionkWh = energyStoredkWh - (energyStoredkWh * percentageFromStored);
             const energyAfterConsumptionkWh = energyConsumedGridChartkWh - energyAfterDeductionkWh;
-            const energySurpluskWh = Math.min(energyAfterConsumptionkWh, 0);
+            const energySurpluskWh = Math.min(Math.max(energyAfterConsumptionkWh, -surplusMaxkWh), 0);
             const energyStandardkWh = Math.max(energyAfterConsumptionkWh, 0);
             return (energyStandardkWh * priceStandard) + (energySurpluskWh * priceSurplus);
         }
@@ -244,7 +245,7 @@
             });
         }
 
-        function calculateCosts(energyStoredkWh, energyConsumedSolar, energyConsumedGrid, solarCapacity, priceStandard, priceSurplus, priceRetrieval, priceForCapacity, percentageFromStored, monthsInYear, unitMultiplier, energyConsumedGridMax) {
+        function calculateCosts(energyStoredkWh, energyConsumedSolar, energyConsumedGrid, solarCapacity, priceStandard, priceSurplus, surplusMaxkWh, priceRetrieval, priceForCapacity, percentageFromStored, monthsInYear, unitMultiplier, energyConsumedGridMax) {
             const consumedRange = [];
             const costOptions1 = [];
             const costOptions2 = [];
@@ -253,9 +254,9 @@
             for (let energyConsumedGridChart = 0; energyConsumedGridChart <= energyConsumedGridMax; energyConsumedGridChart += (energyConsumedGridMax / 10)) {
                 const energyConsumedGridChartkWh = energyConsumedGridChart * unitMultiplier;
 
-                costOptions1.push(calculateOption1Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, priceRetrieval));
-                costOptions2.push(calculateOption2Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, solarCapacity, priceForCapacity, monthsInYear));
-                costOptions3.push(calculateOption3Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, percentageFromStored));
+                costOptions1.push(calculateOption1Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, surplusMaxkWh, priceRetrieval));
+                costOptions2.push(calculateOption2Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, surplusMaxkWh, solarCapacity, priceForCapacity, monthsInYear));
+                costOptions3.push(calculateOption3Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, surplusMaxkWh, percentageFromStored));
 
                 consumedRange.push(energyConsumedGridChart.toFixed(0));
             }
@@ -283,6 +284,7 @@
                 const percentageFromStored = 33 / 100;
                 const monthsInYear = 12;
                 const priceSurplus = 0.086; // 2023m atpirkimo tarifas
+                const surplusMaxkWh = 500; // per du metus max ESO atperka 500kWh
 
                 // Input values with default values
                 const energyStored = ref(5);
@@ -311,9 +313,9 @@
                 const energySufficiency = computed(() => energyConsumed.value > 0 ? (energyConsumedSolar.value / energyConsumed.value * 100) : 0);
                 const energyBalance = computed(() => (energyStored.value - energyConsumedGrid.value));
                 const costStandard = computed(() => (energyConsumedSolarkWh.value + energyConsumedGridkWh.value) * priceStandard);
-                const costOption1 = computed(() => calculateOption1Cost(energyStoredkWh.value, energyConsumedGridkWh.value, priceStandard, priceSurplus, priceRetrieval));
-                const costOption2 = computed(() => calculateOption2Cost(energyStoredkWh.value, energyConsumedGridkWh.value, priceStandard, priceSurplus, solarCapacity.value, priceForCapacity, monthsInYear));
-                const costOption3 = computed(() => calculateOption3Cost(energyStoredkWh.value, energyConsumedGridkWh.value, priceStandard, priceSurplus, percentageFromStored));
+                const costOption1 = computed(() => calculateOption1Cost(energyStoredkWh.value, energyConsumedGridkWh.value, priceStandard, priceSurplus, surplusMaxkWh, priceRetrieval));
+                const costOption2 = computed(() => calculateOption2Cost(energyStoredkWh.value, energyConsumedGridkWh.value, priceStandard, priceSurplus, surplusMaxkWh, solarCapacity.value, priceForCapacity, monthsInYear));
+                const costOption3 = computed(() => calculateOption3Cost(energyStoredkWh.value, energyConsumedGridkWh.value, priceStandard, priceSurplus, surplusMaxkWh, percentageFromStored));
 
                 const bestOptionText = computed(() => {
                     const bestOption = Math.min(costOption1.value, costOption2.value, costOption3.value);
@@ -332,7 +334,7 @@
                 });
 
                 watch([energyStoredkWh, energyConsumedSolar, energyConsumedGrid, solarCapacity, unitMultiplier, energyConsumedGridMax], ([energyStoredkWhNew, energyConsumedSolarNew, energyConsumedGridNew, solarCapacityNew, unitMultiplierNew, energyConsumedGridMaxNew]) => {
-                    calculateCosts(energyStoredkWhNew, energyConsumedSolarNew, energyConsumedGridNew, solarCapacityNew, priceStandard, priceSurplus, priceRetrieval, priceForCapacity, percentageFromStored, monthsInYear, unitMultiplierNew, energyConsumedGridMaxNew);
+                    calculateCosts(energyStoredkWhNew, energyConsumedSolarNew, energyConsumedGridNew, solarCapacityNew, priceStandard, priceSurplus, surplusMaxkWh, priceRetrieval, priceForCapacity, percentageFromStored, monthsInYear, unitMultiplierNew, energyConsumedGridMaxNew);
                 }, { immediate: true });
 
                 return {
@@ -350,6 +352,7 @@
                     priceRetrieval,
                     priceForCapacity,
                     percentageFromStored,
+                    surplusMaxkWh,
 
                     energyStored,
                     energyConsumedSolar,
