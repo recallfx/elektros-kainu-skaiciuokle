@@ -18,45 +18,55 @@
 
 <body>
     <div id="app" v-cloak class="container mx-auto px-4">
-        <header class="flex justify-between text-center py-4">
-            <h1 class="text-lg font-bold mb-2">Elektros kainų skaičiuoklė 2024m</h1>
-            <a href="https://github.com/recallfx/elektros-kainu-skaiciuokle" target="_blank" class="flex items-center gap-2">
+        <header class="flex justify-between items-center gap-2 py-4">
+            <h1 class="text-lg font-bold flex-1">Elektros kainų skaičiuoklė 2024m</h1>
+            <div class="whitespace-nowrap space-x-1">
+                <input type="checkbox" id="isMhw" v-model="isMhw">
+                <label for="isMhw">MWh</label>
+            </div>
+            <a href="https://github.com/recallfx/elektros-kainu-skaiciuokle" target="_blank"
+                class="flex items-center gap-2">
                 <svg height="32" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true">
                     <path fill-rule="evenodd"
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
                     </path>
                 </svg>
             </a>
+            <span class="text-neutral-400">v3</span>
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="space-y-4">
                 <div>
                     <label for="energyConsumedSolar" class="block text-sm font-medium mb-2">Suvartota tiesiogiai iš
-                        saulės (MWh):</label>
+                        saulės ({{units}}):</label>
                     <div class="flex items-center space-x-4">
-                        <input type="number" id="energyConsumedSolar" v-model="energyConsumedSolar" min="0" max="10"
+                        <input type="number" id="energyConsumedSolar" v-model.number="energyConsumedSolar" min="0"
                             class="shadow border rounded py-2 px-3 w-20 text-grey-darker">
-                        <input type="range" v-model="energyConsumedSolar" min="0" max="10" step="1" class="flex-1">
+                        <input type="range" v-model.number="energyConsumedSolar" min="0" :max="energyConsumedSolarMax"
+                            :step="energyConsumedSolarMax / 10" class="flex-1">
                     </div>
                 </div>
 
                 <div>
-                    <label for="energyStored" class="block text-sm font-medium mb-2">Atiduota į tinklą (MWh):</label>
+                    <label for="energyStored" class="block text-sm font-medium mb-2">Atiduota į tinklą
+                        ({{units}}):</label>
                     <div class="flex items-center space-x-4">
-                        <input type="number" id="energyStored" v-model="energyStored" min="0" max="10"
+                        <input type="number" id="energyStored" v-model.number="energyStored" min="0"
                             class="shadow border rounded py-2 px-3 w-20 text-grey-darker">
-                        <input type="range" v-model="energyStored" min="0" max="10" step="1" class="flex-1">
+                        <input type="range" v-model.number="energyStored" min="0" :max="energyStoredMax"
+                            :step="energyStoredMax / 10" class="flex-1">
                     </div>
                 </div>
 
                 <div>
                     <label for="energyConsumedGrid" class="block text-sm font-medium mb-2">Suvartota iš tinklo
-                        (MWh):</label>
+                        ({{units}}):</label>
                     <div class="flex items-center space-x-4">
-                        <input type="number" id="energyConsumedGrid" v-model="energyConsumedGrid" min="0" max="10"
+                        <input type="number" id="energyConsumedGrid" v-model.number="energyConsumedGrid" min="0"
                             class="shadow border rounded py-2 px-3 w-20 text-grey-darker">
-                        <input type="range" v-model="energyConsumedGrid" min="0" max="10" step="1" class="flex-1">
+                        <input type="range" v-model.number="energyConsumedGrid" min="0" :max="energyConsumedGridMax"
+                            :step="energyConsumedGridMax / 10" class="flex-1">
                     </div>
                 </div>
 
@@ -64,20 +74,20 @@
                     <label for="solarCapacity" class="block text-sm font-medium mb-2">Leistina generuoti galia
                         (kW):</label>
                     <div class="flex items-center space-x-4">
-                        <input type="number" id="solarCapacity" v-model="solarCapacity" min="0" max="40"
+                        <input type="number" id="solarCapacity" v-model.number="solarCapacity" min="0"
                             class="shadow border rounded py-2 px-3 w-20 text-grey-darker">
-                        <input type="range" v-model="solarCapacity" min="0" max="40" step="1" class="flex-1">
+                        <input type="range" v-model.number="solarCapacity" min="0" :max="solarCapacityMax" step="1"
+                            class="flex-1">
                     </div>
                 </div>
             </div>
 
             <div class="bg-white p-4 shadow rounded text-sm">
-                <div>Viso pagaminta: {{energyProduced.toFixed(2)}} MWh</div>
-                <div>Viso suvartota: {{energyConsumed.toFixed(2)}} MWh</div>
+                <div>Viso pagaminta: {{energyProduced.toFixed(2)}} {{units}}</div>
+                <div>Viso suvartota: {{energyConsumed.toFixed(2)}} {{units}}</div>
                 <div>Savarankiškumas: {{energySufficiency.toFixed(2)}}%</div>
-                <div class="flex flex-col">Balansas: {{energyBalance.toFixed(2)}} MWh<div
-                    v-if="energyBalance > 0"
-                    class="text-xs text-neutral-400">Atpirkimo tarifas {{priceSurplus}}€/kWh</div>
+                <div class="flex flex-col">Balansas: {{energyBalance.toFixed(2)}} {{units}}<div v-if="energyBalance > 0"
+                        class="text-xs text-neutral-400">Atpirkimo tarifas {{priceSurplus}}€/kWh</div>
                 </div>
 
                 <hr class="my-1" />
@@ -210,12 +220,12 @@
                                     borderWidth: 2,
                                     borderDash: [10, 5],
                                     scaleID: 'x',
-                                    value: storedEnergy / 1000,
+                                    value: storedEnergy,
                                 },
                                 {
                                     type: 'line',
                                     scaleID: 'x',
-                                    value: storedEnergyMinus33 / 1000,
+                                    value: storedEnergyMinus33,
                                     borderColor: 'black',
                                     borderWidth: 1,
                                     borderDash: [10, 5]
@@ -234,14 +244,14 @@
             });
         }
 
-        function calculateCosts(energyStoredkWh, energyConsumedSolar, energyConsumedGrid, solarCapacity, priceStandard, priceSurplus, priceRetrieval, priceForCapacity, percentageFromStored, monthsInYear) {
+        function calculateCosts(energyStoredkWh, energyConsumedSolar, energyConsumedGrid, solarCapacity, priceStandard, priceSurplus, priceRetrieval, priceForCapacity, percentageFromStored, monthsInYear, unitMultiplier, energyConsumedGridMax) {
             const consumedRange = [];
             const costOptions1 = [];
             const costOptions2 = [];
             const costOptions3 = [];
 
-            for (let energyConsumedGridChart = 0; energyConsumedGridChart <= 10; energyConsumedGridChart += 1) {
-                const energyConsumedGridChartkWh = energyConsumedGridChart * 1000; // Convert MWh to kWh
+            for (let energyConsumedGridChart = 0; energyConsumedGridChart <= energyConsumedGridMax; energyConsumedGridChart += (energyConsumedGridMax / 10)) {
+                const energyConsumedGridChartkWh = energyConsumedGridChart * unitMultiplier;
 
                 costOptions1.push(calculateOption1Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, priceRetrieval));
                 costOptions2.push(calculateOption2Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, solarCapacity, priceForCapacity, monthsInYear));
@@ -250,11 +260,22 @@
                 consumedRange.push(energyConsumedGridChart.toFixed(0));
             }
 
-            updateChart(costOptions1, costOptions2, costOptions3, consumedRange, energyStoredkWh, energyStoredkWh * (1 - percentageFromStored), energyConsumedGrid);
+            updateChart(costOptions1, costOptions2, costOptions3, consumedRange, energyStoredkWh / unitMultiplier, energyStoredkWh * (1 - percentageFromStored) / unitMultiplier, energyConsumedGrid);
         }
 
         createApp({
             setup() {
+                const isMhw = ref(true);
+                const unitMultiplier = computed(() => isMhw.value ? 1000 : 1);
+                const units = computed(() => isMhw.value ? 'MWh' : 'kWh');
+
+                // Max values
+                const energyConsumedSolarMax = ref(10);
+                const energyStoredMax = ref(10);
+                const energyConsumedGridMax = ref(10);
+
+                const solarCapacityMax = 60;
+
                 // Default values 2024
                 const priceStandard = 0.227;
                 const priceRetrieval = 0.07139;
@@ -269,18 +290,29 @@
                 const energyConsumedGrid = ref(5);
                 const solarCapacity = ref(10);
 
-                const energyStoredkWh = computed(() => Number(energyStored.value) * 1000);
-                const energyConsumedSolarkWh = computed(() => Number(energyConsumedSolar.value) * 1000);
-                const energyConsumedGridkWh = computed(() => Number(energyConsumedGrid.value) * 1000);
-                const energyConsumed = computed(() => Number(energyConsumedSolar.value) + Number(energyConsumedGrid.value));
-                const energyProduced = computed(() => Number(energyConsumedSolar.value) + Number(energyStored.value));
+                watch([isMhw], ([isMhwNew]) => {
+                    const multiplier = isMhwNew ? 1 / 1000 : 1000;
+                    energyStored.value = energyStored.value * multiplier;
+                    energyConsumedSolar.value = energyConsumedSolar.value * multiplier;
+                    energyConsumedGrid.value = energyConsumedGrid.value * multiplier;
+
+                    energyConsumedSolarMax.value = energyConsumedSolarMax.value * multiplier;
+                    energyStoredMax.value = energyStoredMax.value * multiplier;
+                    energyConsumedGridMax.value = energyConsumedGridMax.value * multiplier;
+                });
+
+                const energyStoredkWh = computed(() => energyStored.value * unitMultiplier.value);
+                const energyConsumedSolarkWh = computed(() => energyConsumedSolar.value * unitMultiplier.value);
+                const energyConsumedGridkWh = computed(() => energyConsumedGrid.value * unitMultiplier.value);
+                const energyConsumed = computed(() => energyConsumedSolar.value + energyConsumedGrid.value);
+                const energyProduced = computed(() => energyConsumedSolar.value + energyStored.value);
 
 
-                const energySufficiency = computed(() => energyConsumed.value > 0 ? (Number(energyConsumedSolar.value) / energyConsumed.value * 100) : 0);
-                const energyBalance = computed(() => (Number(energyStored.value) - Number(energyConsumedGrid.value)));
+                const energySufficiency = computed(() => energyConsumed.value > 0 ? (energyConsumedSolar.value / energyConsumed.value * 100) : 0);
+                const energyBalance = computed(() => (energyStored.value - energyConsumedGrid.value));
                 const costStandard = computed(() => (energyConsumedSolarkWh.value + energyConsumedGridkWh.value) * priceStandard);
                 const costOption1 = computed(() => calculateOption1Cost(energyStoredkWh.value, energyConsumedGridkWh.value, priceStandard, priceSurplus, priceRetrieval));
-                const costOption2 = computed(() => calculateOption2Cost(energyStoredkWh.value, energyConsumedGridkWh.value, priceStandard, priceSurplus, Number(solarCapacity.value), priceForCapacity, monthsInYear));
+                const costOption2 = computed(() => calculateOption2Cost(energyStoredkWh.value, energyConsumedGridkWh.value, priceStandard, priceSurplus, solarCapacity.value, priceForCapacity, monthsInYear));
                 const costOption3 = computed(() => calculateOption3Cost(energyStoredkWh.value, energyConsumedGridkWh.value, priceStandard, priceSurplus, percentageFromStored));
 
                 const bestOptionText = computed(() => {
@@ -299,11 +331,20 @@
                     }
                 });
 
-                watch([energyStoredkWh, energyConsumedSolar, energyConsumedGrid, solarCapacity], ([energyStoredkWhNew, energyConsumedSolarNew, energyConsumedGridNew, solarCapacityNew]) => {
-                    calculateCosts(energyStoredkWhNew, energyConsumedSolarNew, energyConsumedGridNew, solarCapacityNew, priceStandard, priceSurplus, priceRetrieval, priceForCapacity, percentageFromStored, monthsInYear);
+                watch([energyStoredkWh, energyConsumedSolar, energyConsumedGrid, solarCapacity, unitMultiplier, energyConsumedGridMax], ([energyStoredkWhNew, energyConsumedSolarNew, energyConsumedGridNew, solarCapacityNew, unitMultiplierNew, energyConsumedGridMaxNew]) => {
+                    calculateCosts(energyStoredkWhNew, energyConsumedSolarNew, energyConsumedGridNew, solarCapacityNew, priceStandard, priceSurplus, priceRetrieval, priceForCapacity, percentageFromStored, monthsInYear, unitMultiplierNew, energyConsumedGridMaxNew);
                 }, { immediate: true });
 
                 return {
+                    isMhw,
+                    unitMultiplier,
+                    units,
+
+                    energyConsumedSolarMax,
+                    energyStoredMax,
+                    energyConsumedGridMax,
+                    solarCapacityMax,
+
                     priceStandard,
                     priceSurplus,
                     priceRetrieval,
