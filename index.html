@@ -125,7 +125,12 @@
             const energyAfterConsumptionkWh = energyConsumedGridChartkWh - energyStoredkWh;
             const energyStandardkWh = Math.max(energyAfterConsumptionkWh, 0);
             const energySurpluskWh = Math.min(energyAfterConsumptionkWh, 0);
-            return (solarCapacity * priceForCapacity * monthsInYear) + (energyStandardkWh * priceStandard) + (energySurpluskWh * priceSurplus);
+
+            if (solarCapacity > 0) {
+                return (solarCapacity * priceForCapacity * monthsInYear) + (energyStandardkWh * priceStandard) + (energySurpluskWh * priceSurplus);
+            }
+
+            return energyStandardkWh * priceStandard;
         }
 
         function calculateOption3Cost(energyStoredkWh, energyConsumedGridChartkWh, priceStandard, priceSurplus, percentageFromStored) {
