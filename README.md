@@ -22,3 +22,13 @@ Tai yra interaktyvi skaičiuoklė, kuri padeda nustatyti ekonomiškiausią elekt
 ## Nuorodos
 
 - [ESO Tarifai ir Kainos](https://www.eso.lt/lt/namams/elektra/tarifai-kainos-atsiskaitymas-ir-skolos/gaminanciu-vartotoju-kainos.html)
+
+## Naudoji instrukcija
+
+1. Atidarykite terminalą ir pereikite į projekto katalogą. 
+2. Įdiekite projekto priklausomybes naudodami `yarn`.
+3. Paleiskite projekto testavimo scenarijų naudodami `yarn vitest`.
+4. Paredaguokite kodą `src/` kataloge.
+5. Išbandykite projekta naudodami `yarn dev`.
+6. Paleiskite projekto kūrimo scenarijų naudodami `yarn run build`. 
+7. Peržiūrėkite sukurtus failus `/docs` kataloge.
