@@ -245,47 +245,43 @@
           <div class="flex flex-col">
             Kaina įprastu tarifu: {{costStandard.toFixed(2)}}€
             <div class="text-xs text-neutral-400">
-              Tarifas {{priceStandardInput}}€/kWh
+              Tarifas {{priceStandardInput}}€/kWh jei suvartota iš tinklo ir neliko saugomos energijos.
             </div>
           </div>
           <hr class="my-1" />
           <div class="flex flex-col text-body">
-            1 varianto kaina: {{costOption1.toFixed(2)}}€
+            <div class="flex items-center">
+              <span class="w-4 h-4 mr-2 bg-red-500 inline-block"></span> 1
+              variantas: {{costOption1.toFixed(2)}}€
+            </div>
             <div class="text-xs text-neutral-400">
-              Atgavimo tarifas {{priceRetrievalInput}}€/kWh
+              <b>Saugomos</b> energijos grąžinimas mokamas tarifu {{priceRetrievalInput}}€/kWh.
             </div>
           </div>
           <hr class="my-1" />
           <div class="flex flex-col text-body">
-            2 varianto kaina: {{costOption2.toFixed(2)}}€
+            <div class="flex items-center">
+              <span class="w-4 h-4 mr-2 bg-blue-500 inline-block"></span> 2
+              variantas: {{costOption2.toFixed(2)}}€
+            </div>
             <div class="text-xs text-neutral-400">
-              Už elektrinės galią {{priceForCapacityInput}}€kW/mėn
+              Fiksuota suma už elektrinės galią {{priceForCapacityInput}}€kW/mėn, <b>saugomos</b> energijos grąžinimas nemokamas.
             </div>
           </div>
           <hr class="my-1" />
           <div class="flex flex-col text-body">
-            3 varianto kaina: {{costOption3.toFixed(2)}}€
+            <div class="flex items-center">
+              <span class="w-4 h-4 mr-2 bg-green-500 inline-block"></span> 3
+              variantas: {{costOption3.toFixed(2)}}€
+            </div>
             <div class="text-xs text-neutral-400">
-              Atiduodama dalis tinklui {{percentageFromStoredInput}}%
+              {{percentageFromStoredInput}}% eina tinklams, likusios <b>saugomos</b> energijos grąžinimas nemokamas.
             </div>
           </div>
           <hr class="my-1" />
           <div class="pt-2 font-medium">{{bestOptionText}}</div>
         </div>
       </div>
-
-      <div class="p-4 flex gap-4 text-xs mt-6">
-        <div class="flex items-center mb-1">
-          <span class="w-4 h-4 mr-2 bg-red-500 inline-block"></span> Variantas 1: Sumažintas tarifas
-        </div>
-        <div class="flex items-center mb-1">
-          <span class="w-4 h-4 mr-2 bg-blue-500 inline-block"></span> Variantas 2: Mokėti už galią
-        </div>
-        <div class="flex items-center mb-1">
-          <span class="w-4 h-4 mr-2 bg-green-500 inline-block"></span> Variantas 3: {{percentageFromStoredInput}}% atiduoti į tinklą
-        </div>
-    </div>
-
     </div>
     <div class="md:container md:mx-auto p-4">
       <canvas id="costChart"></canvas>

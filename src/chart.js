@@ -29,21 +29,21 @@ export function renderChart({
       labels: consumedRange,
       datasets: [
         {
-          label: "Variantas 1: Sumažintas tarifas",
+          label: "Variantas 1",
           data: costOptions1,
           borderColor: "rgb(239 68 68)",
           fill: false,
           pointStyle: false,
         },
         {
-          label: "Variantas 2: Mokėti už galią",
+          label: "Variantas 2",
           data: costOptions2,
           borderColor: "rgb(59 130 246)",
           fill: false,
           pointStyle: false,
         },
         {
-          label: "Variantas 3: 33% atiduoti į tinklą",
+          label: "Variantas 3",
           data: costOptions3,
           borderColor: "rgb(34 197 94)",
           fill: false,
