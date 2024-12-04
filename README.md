@@ -10,7 +10,7 @@ Tai yra interaktyvi skaičiuoklė, kuri padeda nustatyti ekonomiškiausią elekt
 
 - Skaičiavimas remiasi naujausiais ESO tarifais.
 - Vartotojas gali įvesti savo duomenis ir pamatyti, kuris planas jam labiausiai tinka.
-- Naujausia versija atnaujinta 2024 metams.
+- Naujausia versija atnaujinta 2025 metams.
 
 ## Kaip naudotis
 
