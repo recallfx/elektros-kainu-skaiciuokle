@@ -3,7 +3,7 @@
   "version": "4.1.0",
   "main": "index.js",
   "repository": "git@github.com:recallfx/elektros-kainu-skaiciuokle.git",
-  "license": "GPLv3",
+  "license": "CC-BY-NC-1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
