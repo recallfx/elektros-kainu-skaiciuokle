@@ -12,16 +12,16 @@
     "test": "vitest"
   },
   "dependencies": {
-    "chart.js": "^4.4.1",
-    "chartjs-plugin-annotation": "^3.0.1",
-    "vue": "^3.3.11"
+    "chart.js": "^4.4.7",
+    "chartjs-plugin-annotation": "^3.1.0",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.5.2",
-    "autoprefixer": "^10.4.16",
-    "postcss": "^8.4.32",
-    "tailwindcss": "^3.3.6",
-    "vite": "^5.0.7",
-    "vitest": "^1.0.2"
+    "@vitejs/plugin-vue": "^5.2.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.16",
+    "vite": "^6.0.2",
+    "vitest": "^2.1.8"
   }
 }
