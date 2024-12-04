@@ -6,7 +6,8 @@ export function calculateOption3Cost({
   surplusMax,
   percentageFromStored,
 }) {
-  const energyAfterDeductionkWh = energyStored * (1 - (percentageFromStored / 100));
+  const energyAfterDeductionkWh =
+    energyStored * (1 - percentageFromStored / 100);
   const energyAfterConsumptionkWh =
     energyConsumedGrid - energyAfterDeductionkWh;
   const energySurpluskWh = Math.min(

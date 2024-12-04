@@ -1,5 +1,5 @@
 import Chart from "chart.js/auto";
-import annotationPlugin from 'chartjs-plugin-annotation';
+import annotationPlugin from "chartjs-plugin-annotation";
 
 Chart.register(annotationPlugin);
 
@@ -173,7 +173,7 @@ export function updateChart({
     consumedRange,
     storedEnergy: energyStored / 1000,
     storedEenergyAfterDeduction:
-      (energyStored * (1 - (percentageFromStored / 100))) / 1000,
+      (energyStored * (1 - percentageFromStored / 100)) / 1000,
     energyConsumedGrid: energyConsumedGrid / 1000,
   });
 }
