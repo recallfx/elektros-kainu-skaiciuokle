@@ -1,5 +1,5 @@
+import { describe, expect, test } from "vitest";
 import { calculateOption2Cost } from "../calculateOption2Cost.js";
-import { expect, describe, test } from "vitest";
 
 describe("calculateOption2Cost", () => {
   const priceStandard = 3;
@@ -67,9 +67,7 @@ describe("calculateOption2Cost", () => {
     });
 
     expect(result).toBe(0);
-    expect(energyAfterConsumptionkWh).toBe(
-      energyConsumedGrid - energyStored
-    );
+    expect(energyAfterConsumptionkWh).toBe(energyConsumedGrid - energyStored);
     expect(energyStandardkWh).toBe(0);
     expect(energySurpluskWh).toBe(-0);
     expect(solarCapacityPrice).toBe(0);
@@ -103,9 +101,7 @@ describe("calculateOption2Cost", () => {
     });
 
     expect(result).toBe(solarCapacity * priceForCapacity * monthsInYear);
-    expect(energyAfterConsumptionkWh).toBe(
-      energyConsumedGrid - energyStored
-    );
+    expect(energyAfterConsumptionkWh).toBe(energyConsumedGrid - energyStored);
     expect(energyStandardkWh).toBe(0);
     expect(energySurpluskWh).toBe(energyConsumedGrid - energyStored);
     expect(solarCapacityPrice).toBe(
@@ -144,9 +140,7 @@ describe("calculateOption2Cost", () => {
       solarCapacity * priceForCapacity * monthsInYear +
         energyConsumedGrid * priceStandard
     );
-    expect(energyAfterConsumptionkWh).toBe(
-      energyConsumedGrid - energyStored
-    );
+    expect(energyAfterConsumptionkWh).toBe(energyConsumedGrid - energyStored);
     expect(energyStandardkWh).toBe(energyConsumedGrid);
     expect(energySurpluskWh).toBe(0);
     expect(solarCapacityPrice).toBe(
@@ -185,9 +179,7 @@ describe("calculateOption2Cost", () => {
       solarCapacity * priceForCapacity * monthsInYear +
         energyConsumedGrid * priceStandard
     );
-    expect(energyAfterConsumptionkWh).toBe(
-      energyConsumedGrid - energyStored
-    );
+    expect(energyAfterConsumptionkWh).toBe(energyConsumedGrid - energyStored);
     expect(energyStandardkWh).toBe(0);
     expect(energySurpluskWh).toBe(-0);
     expect(solarCapacityPrice).toBe(
@@ -223,9 +215,7 @@ describe("calculateOption2Cost", () => {
     });
 
     expect(result).toBe(solarCapacity * priceForCapacity * monthsInYear);
-    expect(energyAfterConsumptionkWh).toBe(
-      energyConsumedGrid - energyStored
-    );
+    expect(energyAfterConsumptionkWh).toBe(energyConsumedGrid - energyStored);
     expect(energyStandardkWh).toBe(0);
     expect(energySurpluskWh).toBe(0);
     expect(solarCapacityPrice).toBe(
@@ -264,9 +254,7 @@ describe("calculateOption2Cost", () => {
     expect(result).toBe(
       solarCapacity * priceForCapacity * 1 - surplusMax * priceSurplus
     );
-    expect(energyAfterConsumptionkWh).toBe(
-      energyConsumedGrid - energyStored
-    );
+    expect(energyAfterConsumptionkWh).toBe(energyConsumedGrid - energyStored);
     expect(energyStandardkWh).toBe(0);
     expect(energySurpluskWh).toBe(-surplusMax);
     expect(solarCapacityPrice).toBe(solarCapacity * priceForCapacity * 1);
@@ -303,9 +291,7 @@ describe("calculateOption2Cost", () => {
       solarCapacity * priceForCapacity * monthsInYear +
         energySurpluskWh * priceSurplus
     );
-    expect(energyAfterConsumptionkWh).toBe(
-      energyConsumedGrid - energyStored
-    );
+    expect(energyAfterConsumptionkWh).toBe(energyConsumedGrid - energyStored);
     expect(energyStandardkWh).toBe(0);
     expect(energySurpluskWh).toBe(0);
     expect(solarCapacityPrice).toBe(
@@ -344,9 +330,7 @@ describe("calculateOption2Cost", () => {
       solarCapacity * priceForCapacity * monthsInYear +
         energyStandardkWh * priceStandard
     );
-    expect(energyAfterConsumptionkWh).toBe(
-      energyConsumedGrid - energyStored
-    );
+    expect(energyAfterConsumptionkWh).toBe(energyConsumedGrid - energyStored);
     expect(energyStandardkWh).toBe(energyConsumedGrid - energyStored);
     expect(energySurpluskWh).toBe(0);
     expect(solarCapacityPrice).toBe(
@@ -385,9 +369,7 @@ describe("calculateOption2Cost", () => {
       solarCapacity * priceForCapacity * monthsInYear +
         energySurpluskWh * priceSurplus
     );
-    expect(energyAfterConsumptionkWh).toBe(
-      energyConsumedGrid - energyStored
-    );
+    expect(energyAfterConsumptionkWh).toBe(energyConsumedGrid - energyStored);
     expect(energyStandardkWh).toBe(0);
     expect(energySurpluskWh).toBe(-0);
     expect(solarCapacityPrice).toBe(

@@ -1,5 +1,5 @@
 import Chart from "chart.js/auto";
-import annotationPlugin from 'chartjs-plugin-annotation';
+import annotationPlugin from "chartjs-plugin-annotation";
 
 Chart.register(annotationPlugin);
 
@@ -18,12 +18,7 @@ export function renderChart({
   storedEenergyAfterDeduction,
   energyConsumedGrid,
 }) {
-  const ctx = document.getElementById("costChart").getContext("2d");
-  if (costChart) {
-    costChart.destroy(); // Destroy the old chart instance before creating a new one
-  }
-
-  costChart = new Chart(ctx, {
+  const data = {
     type: "line",
     data: {
       labels: consumedRange,
@@ -104,7 +99,16 @@ export function renderChart({
         },
       },
     },
-  });
+  };
+
+  const ctx = document.getElementById("costChart").getContext("2d");
+  if (!costChart) {
+    costChart = new Chart(ctx, data);
+  } else {
+    costChart.data = data.data;
+    costChart.options = data.options;
+    costChart.update();
+  }
 }
 
 export function updateChart({
@@ -173,7 +177,7 @@ export function updateChart({
     consumedRange,
     storedEnergy: energyStored / 1000,
     storedEenergyAfterDeduction:
-      (energyStored * (1 - (percentageFromStored / 100))) / 1000,
+      (energyStored * (1 - percentageFromStored / 100)) / 1000,
     energyConsumedGrid: energyConsumedGrid / 1000,
   });
 }

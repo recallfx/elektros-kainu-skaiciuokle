@@ -1,5 +1,5 @@
+import { describe, expect, test } from "vitest";
 import { calculateOption3Cost } from "../calculateOption3Cost.js";
-import { expect, describe, test } from "vitest";
 
 describe("calculateOption3Cost", () => {
   const priceStandard = 3;
