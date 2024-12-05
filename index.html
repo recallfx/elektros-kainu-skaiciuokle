@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Elektros kainų skaičiuoklė 2025</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      [v-cloak] {
-        display: none;
-      }
-    </style>
-  </head>
 
-  <body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Elektros kainų skaičiuoklė 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-b from-indigo-50 via-purple-100 to-pink-100">
+  <div class="w-screen h-screen overflow-scroll">
     <div id="app" v-cloak class="container mx-auto px-4">
       <header class="flex justify-between items-center gap-2 py-4">
         <h1 class="text-lg font-bold flex-1">
@@ -20,212 +22,109 @@
         </h1>
 
         <button @click="showSettings = !showSettings">
-          <svg
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+          <svg height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
             <circle cx="12" cy="12" r="3"></circle>
             <path
-              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V22a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H2a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06c.46.46 1.1.69 1.82.33a1.65 1.65 0 0 0 1-1.51V2a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82 1.65 1.65 0 0 0 1.51 1H22a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-            ></path>
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V22a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H2a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06c.46.46 1.1.69 1.82.33a1.65 1.65 0 0 0 1-1.51V2a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82 1.65 1.65 0 0 0 1.51 1H22a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+            </path>
           </svg>
         </button>
-        <a
-          href="https://github.com/recallfx/elektros-kainu-skaiciuokle"
-          target="_blank"
-        >
-          <svg
-            height="32"
-            viewBox="0 0 16 16"
-            version="1.1"
-            width="32"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
-            ></path>
+        <a href="https://github.com/recallfx/elektros-kainu-skaiciuokle" target="_blank">
+          <svg height="32" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+            </path>
           </svg>
         </a>
       </header>
 
-      <div
-        class="space-y-2 text-xs text-gray-400 bg-gray-50 p-4 shadow rounded mb-6"
-        v-if="showSettings"
-      >
+      <div class="space-y-2 text-xs text-gray-400 bg-gray-50 p-4 shadow rounded mb-6" v-if="showSettings">
         <div class="flex gap-2 items-center">
-          <input
-            type="number"
-            id="priceStandard"
-            v-model.number="priceStandardInput"
-            min="0"
-            class="shadow border rounded p-1 w-20"
-            placeholder="€/kWh"
-          />
+          <input type="number" id="priceStandard" v-model.number="priceStandardInput" min="0"
+            class="shadow border rounded p-1 w-20" placeholder="€/kWh" />
           <label for="priceStandard">Standartinė kaina (€/kWh)</label>
         </div>
 
         <div class="flex gap-2 items-center">
-          <input
-            type="number"
-            id="priceRetrieval"
-            v-model.number="priceRetrievalInput"
-            min="0"
-            class="shadow border rounded p-1 w-20"
-          />
+          <input type="number" id="priceRetrieval" v-model.number="priceRetrievalInput" min="0"
+            class="shadow border rounded p-1 w-20" />
           <label for="priceRetrieval">Atgavimo tarifas (€/kWh)</label>
         </div>
 
         <div class="flex gap-2 items-center">
-          <input
-            type="number"
-            id="priceForCapacity"
-            v-model.number="priceForCapacityInput"
-            min="0"
-            class="shadow border rounded p-1 w-20"
-          />
+          <input type="number" id="priceForCapacity" v-model.number="priceForCapacityInput" min="0"
+            class="shadow border rounded p-1 w-20" />
           <label for="priceForCapacity">Už elektrinės galią (€kW/mėn)</label>
         </div>
 
         <div class="flex gap-2 items-center">
-          <input
-            type="number"
-            id="percentageFromStored"
-            v-model.number="percentageFromStoredInput"
-            min="0"
-            max="100"
-            class="shadow border rounded p-1 w-20"
-          />
+          <input type="number" id="percentageFromStored" v-model.number="percentageFromStoredInput" min="0" max="100"
+            class="shadow border rounded p-1 w-20" />
           <label for="percentageFromStored">Atiduodama dalis tinklui (%)</label>
         </div>
 
         <div class="flex gap-2 items-center">
-          <input
-            type="number"
-            id="priceSurplus"
-            v-model.number="priceSurplusInput"
-            min="0"
-            class="shadow border rounded p-1 w-20"
-          />
+          <input type="number" id="priceSurplus" v-model.number="priceSurplusInput" min="0"
+            class="shadow border rounded p-1 w-20" />
           <label for="priceSurplus">Atpirkimo tarifas (€/kWh)</label>
         </div>
 
         <div class="flex gap-2 items-center">
-          <input
-            type="number"
-            id="surplusMax"
-            v-model.number="surplusMaxInput"
-            min="0"
-            step="1"
-            class="shadow border rounded p-1 w-20"
-          />
-          <label for="surplusMax"
-            >Atpirkimo tarifo limitas (kWh). Galimai max 500kWh per du
-            metus</label
-          >
+          <input type="number" id="surplusMax" v-model.number="surplusMaxInput" min="0" step="1"
+            class="shadow border rounded p-1 w-20" />
+          <label for="surplusMax">Atpirkimo tarifo limitas (kWh). Galimai max 500kWh per du
+            metus</label>
         </div>
+      </div>
+
+      <div class="text-neutral-500 pb-4">
+        <p>
+          Čia galite apskaičiuoti <strong>metinę</strong> elektros sąskaitą pagal <strong>2025</strong> metų
+          gaminančių vartotojų atsiskaitymo būdus ir pasirinkti pigiausią variantą.
+        </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="space-y-4">
           <div>
-            <label
-              for="energyConsumedSolar"
-              class="block text-sm font-medium mb-2"
-              >Suvartota tiesiogiai iš saulės (kWh):</label
-            >
+            <label for="energyConsumedSolar" class="block text-sm font-medium mb-2">Suvartota tiesiogiai iš saulės
+              (kWh):</label>
             <div class="flex items-center space-x-4">
-              <input
-                type="number"
-                id="energyConsumedSolar"
-                v-model.number="energyConsumedSolarInput"
-                min="0"
-                class="shadow border rounded py-2 px-3 w-20 text-grey-darker"
-              />
-              <input
-                type="range"
-                v-model.number="energyConsumedSolarInput"
-                min="0"
-                :max="energyConsumedSolarMax"
-                :step="energyConsumedSolarMax / 10"
-                class="flex-1"
-              />
+              <input type="number" id="energyConsumedSolar" v-model.number="energyConsumedSolarInput" min="0"
+                class="shadow border rounded py-2 px-3 w-20 text-grey-darker" />
+              <input type="range" v-model.number="energyConsumedSolarInput" min="0" :max="energyConsumedSolarMax"
+                :step="energyConsumedSolarMax / 10" class="flex-1" />
             </div>
           </div>
 
           <div>
-            <label for="energyStored" class="block text-sm font-medium mb-2"
-              >Atiduota į tinklą (kWh):</label
-            >
+            <label for="energyStored" class="block text-sm font-medium mb-2">Atiduota į tinklą (kWh):</label>
             <div class="flex items-center space-x-4">
-              <input
-                type="number"
-                id="energyStored"
-                v-model.number="energyStoredInput"
-                min="0"
-                class="shadow border rounded py-2 px-3 w-20 text-grey-darker"
-              />
-              <input
-                type="range"
-                v-model.number="energyStoredInput"
-                min="0"
-                :max="energyStoredMax"
-                :step="energyStoredMax / 10"
-                class="flex-1"
-              />
+              <input type="number" id="energyStored" v-model.number="energyStoredInput" min="0"
+                class="shadow border rounded py-2 px-3 w-20 text-grey-darker" />
+              <input type="range" v-model.number="energyStoredInput" min="0" :max="energyStoredMax"
+                :step="energyStoredMax / 10" class="flex-1" />
             </div>
           </div>
 
           <div>
-            <label
-              for="energyConsumedGrid"
-              class="block text-sm font-medium mb-2"
-              >Suvartota iš tinklo (kWh):</label
-            >
+            <label for="energyConsumedGrid" class="block text-sm font-medium mb-2">Suvartota iš tinklo (kWh):</label>
             <div class="flex items-center space-x-4">
-              <input
-                type="number"
-                id="energyConsumedGrid"
-                v-model.number="energyConsumedGridInput"
-                min="0"
-                class="shadow border rounded py-2 px-3 w-20 text-grey-darker"
-              />
-              <input
-                type="range"
-                v-model.number="energyConsumedGridInput"
-                min="0"
-                :max="energyConsumedGridMax"
-                :step="energyConsumedGridMax / 10"
-                class="flex-1"
-              />
+              <input type="number" id="energyConsumedGrid" v-model.number="energyConsumedGridInput" min="0"
+                class="shadow border rounded py-2 px-3 w-20 text-grey-darker" />
+              <input type="range" v-model.number="energyConsumedGridInput" min="0" :max="energyConsumedGridMax"
+                :step="energyConsumedGridMax / 10" class="flex-1" />
             </div>
           </div>
 
           <div>
-            <label for="solarCapacity" class="block text-sm font-medium mb-2"
-              >Leistina generuoti galia (kW):</label
-            >
+            <label for="solarCapacity" class="block text-sm font-medium mb-2">Leistina generuoti galia (kW):</label>
             <div class="flex items-center space-x-4">
-              <input
-                type="number"
-                id="solarCapacity"
-                v-model.number="solarCapacityInput"
-                min="0"
-                class="shadow border rounded py-2 px-3 w-20 text-grey-darker"
-              />
-              <input
-                type="range"
-                v-model.number="solarCapacityInput"
-                min="0"
-                :max="solarCapacityMax"
-                step="1"
-                class="flex-1"
-              />
+              <input type="number" id="solarCapacity" v-model.number="solarCapacityInput" min="0"
+                class="shadow border rounded py-2 px-3 w-20 text-grey-darker" />
+              <input type="range" v-model.number="solarCapacityInput" min="0" :max="solarCapacityMax" step="1"
+                class="flex-1" />
             </div>
           </div>
         </div>
@@ -265,7 +164,8 @@
               variantas: {{costOption2.toFixed(2)}}€
             </div>
             <div class="text-xs text-neutral-400">
-              Fiksuota suma už elektrinės galią {{priceForCapacityInput}}€kW/mėn, <b>saugomos</b> energijos grąžinimas nemokamas.
+              Fiksuota suma už elektrinės galią {{priceForCapacityInput}}€kW/mėn, <b>saugomos</b> energijos grąžinimas
+              nemokamas.
             </div>
           </div>
           <hr class="my-1" />
@@ -285,8 +185,18 @@
     </div>
     <div class="md:container md:mx-auto p-4">
       <canvas id="costChart"></canvas>
+
+      <div class="text-neutral-500 text-sm pt-4">
+        Grafike pavaizduota kiekvieno atsiskaitymo būdo metinė kainos kreivė suvartojant nuo 0kWh iki 10000kWh elektros
+        energijos.
+
+        <br />
+        Neigiama kainos reikšmė reiškia, kad vartotojas <strong>teoriškai</strong> gavo kompensaciją už elektros energijos
+        perteklių (galimai max 500kWh per du metus), o teigiama reikšmė reiškia, kad vartotojas sumokėjo už elektros energiją. 
+      </div>
     </div>
 
     <script type="module" src="/src/main.js"></script>
-  </body>
+</body>
+
 </html>

@@ -366,9 +366,9 @@
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
 "@kurkle/color@^0.3.0":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@kurkle/color/-/color-0.3.2.tgz#5acd38242e8bde4f9986e7913c8fdf49d3aa199f"
-  integrity sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@kurkle/color/-/color-0.3.4.tgz#4d4ff677e1609214fc71c580125ddddd86abcabf"
+  integrity sha512-M5UknZPHRu3DEDWoipU6sE8PdkZ6Z/S+v4dD+Ke8IaNlpdSQah50lz1KtcFBa2vsdOnwbbnxJwVM4wty6udA5w==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"

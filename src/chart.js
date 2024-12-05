@@ -18,12 +18,7 @@ export function renderChart({
   storedEenergyAfterDeduction,
   energyConsumedGrid,
 }) {
-  const ctx = document.getElementById("costChart").getContext("2d");
-  if (costChart) {
-    costChart.destroy(); // Destroy the old chart instance before creating a new one
-  }
-
-  costChart = new Chart(ctx, {
+  const data = {
     type: "line",
     data: {
       labels: consumedRange,
@@ -104,7 +99,16 @@ export function renderChart({
         },
       },
     },
-  });
+  };
+
+  const ctx = document.getElementById("costChart").getContext("2d");
+  if (!costChart) {
+    costChart = new Chart(ctx, data);
+  } else {
+    costChart.data = data.data;
+    costChart.options = data.options;
+    costChart.update();
+  }
 }
 
 export function updateChart({
